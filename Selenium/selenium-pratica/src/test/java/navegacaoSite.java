@@ -67,4 +67,55 @@ public class navegacaoSite {
         driver.close();
     }
 
+    @Test
+    @DisplayName("Interagir com o modal de endereços salvos")
+    public void InteragirModalEnderecosSalvos(){
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        Actions actions = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        driver.get("https://amazon.com.br");
+        WebElement botaoLogin = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='nav-signin-tooltip']//span[@class='nav-action-inner']")));
+        actions.moveToElement(botaoLogin).click().perform();
+        WebElement campoEmail = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='ap_email']")));
+        campoEmail.sendKeys("test@hotmail.com");
+        WebElement botaoContinuar = driver.findElement(By.xpath("//input[@id='continue']"));
+        actions.moveToElement(botaoContinuar).click().perform();
+        WebElement campoSenha = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='ap_password']")));
+        campoSenha.sendKeys("test");
+        WebElement botaoFinalizarLogin = driver.findElement(By.xpath("//input[@id='signInSubmit']"));
+        actions.moveToElement(botaoFinalizarLogin).click().perform();
+        WebElement botaoEnderecoSalvos = driver.findElement(By.xpath("//span[@id='nav-global-location-data-modal-action']"));
+        String endereco1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='glow-ingress-line2']"))).getText();
+        actions.moveToElement(botaoEnderecoSalvos).click().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//input[@deliverydestinationtype])[1]")));
+        WebElement enderecoCadastrado2 = driver.findElement(By.xpath("(//input[@deliverydestinationtype])[2]"));
+        actions.moveToElement(enderecoCadastrado2).click().perform();
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[@id='glow-ingress-line2']"), "Gravatá"));
+        String endereco2 = driver.findElement(By.xpath("//span[@id='glow-ingress-line2']")).getText();
+        Assertions.assertFalse(endereco1.equals(endereco2));
+        botaoEnderecoSalvos = driver.findElement(By.xpath("//span[@id='nav-global-location-data-modal-action']"));
+        actions.moveToElement(botaoEnderecoSalvos).click().perform();
+        WebElement campoCEP1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='GLUXZipUpdateInput_0']")));
+        campoCEP1.sendKeys("50050");
+        WebElement campoCEP2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='GLUXZipUpdateInput_1']")));
+        campoCEP2.sendKeys("900");
+        WebElement confimarCEP = driver.findElement(By.xpath("//span[@data-action='GLUXPostalUpdateAction']"));
+        actions.moveToElement(confimarCEP).click().perform();
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[@id='glow-ingress-line2']"), "50050900"));
+        String endereco3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='glow-ingress-line2']"))).getText();
+        Assertions.assertFalse(endereco2.equals(endereco3));
+        botaoEnderecoSalvos = driver.findElement(By.xpath("//span[@id='nav-global-location-data-modal-action']"));
+        actions.moveToElement(botaoEnderecoSalvos).click().perform();
+        campoCEP1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='GLUXZipUpdateInput_0']")));
+        campoCEP1.clear();
+        campoCEP1.sendKeys("00000");
+        confimarCEP = driver.findElement(By.xpath("//span[@data-action='GLUXPostalUpdateAction']"));
+        actions.moveToElement(confimarCEP).click().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='GLUXZipError']")));
+        driver.close();
+    }
+
 }
