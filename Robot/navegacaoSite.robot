@@ -19,3 +19,18 @@ Navegar pelo menu suspenso das opções do usuário
     Passe o mouse sobre o campo que indica o nome do usuário
     Navegue para a lista de pedidos do usuário pelo menu suspeso que apareceu na tela
     Verifique que foi redirecionado para a página da lista de pedidos do usuário
+
+Interagir com o modal de endereços salvos
+    Fazer Login com o email "test@hotmail.com" e a senha "test"
+    Clique no campo para mudar o endereço
+    ${ENDERECO_1}    Get Text    ${ENDERECO_SELECIONADO}
+    Verifique que todo os endereços cadastrados aparecem no modal
+    Mude para um novo endereço
+    Verifique que o CEP e o nome da cidade são diferentes de "${ENDERECO_1}"
+    Clique no campo para mudar o endereço
+    ${ENDERECO_2}    Get Text    ${ENDERECO_SELECIONADO}
+    Coloque o número de um CEP "50050" "900"
+    Verifique que o CEP e o nome da cidade são diferentes de "${ENDERECO_2}"
+    Clique no campo para mudar o endereço
+    Coloque o número de um CEP "00000" "900"
+    Verifique que o alerta de erro aparece
