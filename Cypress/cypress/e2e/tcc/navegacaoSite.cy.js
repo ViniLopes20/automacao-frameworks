@@ -86,4 +86,26 @@ describe('Testes relacionados com navegação pelo site', () => {
 
       cy.get('#GLUXZipError').should('be.visible');
     });
+
+    it('Navegar pelo widget tipo Slider', () => { 
+      cy.get('[id=desktop-top] .a-spacing-none > .feed-left').should('have.class', 'feed-control-disabled');
+
+      cy.get('[id=desktop-top] .a-spacing-none > .feed-right').should('not.have.class', 'feed-control-disabled');
+
+      for (let i = 0; i < 7; i++) {
+        cy.get('[id=desktop-top] .a-spacing-none > .feed-right').click();
+      }
+
+      cy.get('[id=desktop-top] .a-spacing-none > .feed-right').should('have.class', 'feed-control-disabled');
+
+      cy.get('[id=desktop-top] .a-spacing-none > .feed-left').should('not.have.class', 'feed-control-disabled');
+
+      for (let i = 0; i < 7; i++) {
+        cy.get('[id=desktop-top] .a-spacing-none > .feed-left').click();
+      }
+      
+      cy.get('[id=desktop-top] .a-spacing-none > .feed-left').should('have.class', 'feed-control-disabled');
+
+      cy.get('[id=desktop-top] .a-spacing-none > .feed-right').should('not.have.class', 'feed-control-disabled');
+    });
   });
