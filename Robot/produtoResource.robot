@@ -122,7 +122,7 @@ Escrever a avaliação do produto com o título "${TITULO_AVALIACAO}" e os detal
     Wait Until Element Is Visible    ${CINCO_ESTRELAS}
     Click Element    ${CINCO_ESTRELAS}
     Input Text    ${CAMPO_TITULO_AVALIACAO}    ${TITULO_AVALIACAO}
-    Choose File    ${UPLOAD_IMAGEM_PRODUTO}    /home/me/Vinicius/automacao.png
+    Choose File    ${UPLOAD_IMAGEM_PRODUTO}    /home/me/Vinicius/automacao-frameworks/automacao.png
     Input Text    ${CAMPO_AVALICAO_DETALHES}    ${AVALICAO_DETALHES}
 
 Enviar a avaliação

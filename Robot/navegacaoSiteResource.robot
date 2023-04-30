@@ -69,6 +69,7 @@ Expandir o menu lateral do site
 Navegar para a categoria Games e Console
     Click Element    ${OPCAO_CATEGORIA_GAMES_CONSOLE}
     Click Element    ${OPCAO_SUBCATEGORIA_GAMES_CONSOLE}
+    Wait Until Element Is Visible    ${DEPARTAMENTO_SELECIONADO}
 
 Verificar o título da página "${TITULO_PAGINA}"
     Title Should Be    ${TITULO_PAGINA}
