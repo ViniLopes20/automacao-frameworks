@@ -68,6 +68,35 @@ public class navegacaoSite {
     }
 
     @Test
+    @DisplayName("Navegar pelo widget tipo Slider")
+    public void NavegarWidgetSlider() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        Actions actions = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        driver.get("https://amazon.com.br");
+        WebElement voltarMenuSlider = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='desktop-top']//a[@aria-label='Voltar para slide anterior']")));
+        String VoltarDesabilitadoClass = voltarMenuSlider.getAttribute("class");
+        Assertions.assertTrue(VoltarDesabilitadoClass.contains("feed-control-disabled"));
+        WebElement avancarMenuSlider = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='desktop-top']//a[@aria-label='Passar para próximo slide']")));
+        String AvancarHabilitadoClass = avancarMenuSlider.getAttribute("class");
+        Assertions.assertFalse(AvancarHabilitadoClass.contains("feed-control-disabled"));
+        actions.moveToElement(avancarMenuSlider).click().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='desktop-top']//a[@aria-label='Passar para próximo slide' and contains(@class,'disabled')]")));
+        String VoltarHabilitadoClass = voltarMenuSlider.getAttribute("class");
+        Assertions.assertFalse(VoltarHabilitadoClass.contains("feed-control-disabled"));
+        String AvancarDesabilitadoClass = avancarMenuSlider.getAttribute("class");
+        Assertions.assertTrue(AvancarDesabilitadoClass.contains("feed-control-disabled"));
+        actions.moveToElement(voltarMenuSlider).click().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='desktop-top']//a[@aria-label='Voltar para slide anterior' and contains(@class,'disabled')]")));
+        Assertions.assertTrue(VoltarDesabilitadoClass.contains("feed-control-disabled"));
+        Assertions.assertFalse(AvancarHabilitadoClass.contains("feed-control-disabled"));
+        driver.close();
+    }
+
+    @Test
     @DisplayName("Interagir com o modal de endereços salvos")
     public void InteragirModalEnderecosSalvos(){
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
