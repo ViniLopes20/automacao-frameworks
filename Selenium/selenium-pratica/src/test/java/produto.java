@@ -55,6 +55,46 @@ public class produto {
     }
 
     @Test
+    @DisplayName("Interagir com as funcionalidades do reprodutor de vídeo dos produtos")
+    public void InteragirReprodutorVideo() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        Actions actions = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        driver.get("https://www.amazon.com.br/Logitech-MX-Master-3S-Superf%C3%ADcie/dp/B0B11LJ69K/ref=sr_1_2?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=EY6N70D07TZP&keywords=logitech+mx+master+3s&qid=1682869534&sprefix=logitech+mx+master+3s%2Caps%2C251&sr=8-2&ufe=app_do%3Aamzn1.fos.25548f35-0de7-44b3-b28e-0f56f3f96147");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='twotabsearchtextbox']")));
+        js.executeScript("window.scrollBy(0,3300)");
+        WebElement containerVideo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class,'vse-player-container')]")));
+        WebElement reproduzirVideo = driver.findElement(By.xpath("//button[@title='Play Video']"));
+        actions.moveToElement(reproduzirVideo).click().perform();
+        actions.moveToElement(containerVideo);
+        WebElement tempoReproducao = driver.findElement(By.xpath("//span[@class='vjs-remaining-time-display']"));
+        actions.moveToElement(containerVideo);
+        String valorTempoReproducao1 = tempoReproducao.getText();
+        Thread.sleep(3000);
+        actions.moveToElement(containerVideo);
+        String valorTempoReproducao2 = tempoReproducao.getText();
+        Assertions.assertFalse(valorTempoReproducao2.equals(valorTempoReproducao1));
+        WebElement pausarVideo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Pause']")));
+        actions.moveToElement(containerVideo);
+        actions.moveToElement(pausarVideo).click().perform();
+        String valorTempoPausado1 = tempoReproducao.getText();
+        String valorTempoPausado2 = tempoReproducao.getText();
+        Assertions.assertTrue(valorTempoPausado2.equals(valorTempoPausado1));
+        WebElement volumeSom = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'vjs-mute-control')]")));
+        actions.moveToElement(volumeSom).click().perform();
+        String volumeSomDesligadoClass = volumeSom.getAttribute("class");
+        Assertions.assertTrue(volumeSomDesligadoClass.contains("vjs-vol-0"));
+        actions.moveToElement(volumeSom).click().perform();
+        String volumeSomLigadoClass = volumeSom.getAttribute("class");
+        Assertions.assertFalse(volumeSomLigadoClass.contains("vjs-vol-0"));
+        driver.close();
+    }
+
+    @Test
     @DisplayName("Escrever uma avaliação para um produto")
     public void EnviarAvaliaçãoProduto(){
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
