@@ -40,6 +40,38 @@ describe('Testes relacionados com a lista de produtos', () => {
     });
   });
 
+  it('Interagir com as funcionalidades do reprodutor de vídeo dos produtos', () => {
+    cy.visit('https://www.amazon.com.br/Logitech-MX-Master-3S-Superf%C3%ADcie/dp/B0B11LJ69K/ref=sr_1_2?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=EY6N70D07TZP&keywords=logitech+mx+master+3s&qid=1682869534&sprefix=logitech+mx+master+3s%2Caps%2C251&sr=8-2&ufe=app_do%3Aamzn1.fos.25548f35-0de7-44b3-b28e-0f56f3f96147');
+
+    cy.scrollTo(0, 4200);
+
+    cy.get('.vjs-big-play-button').click();
+
+    cy.get('.vjs-remaining-time').invoke('text').then((valorTempoReproducao1) => {
+      cy.wait(3000);
+      cy.get('.vjs-remaining-time').invoke('text').then((valorTempoReproducao2) => {
+        assert.notEqual(valorTempoReproducao1, valorTempoReproducao2, 'Os valores das variáveis são iguais');
+      });
+    });
+
+    cy.get('[title="Pause"]').click();
+
+    cy.get('.vjs-remaining-time').invoke('text').then((valorTempoPausado1) => {
+      cy.wait(2000);
+      cy.get('.vjs-remaining-time').invoke('text').then((valorTempoPausado2) => {
+        expect(valorTempoPausado1).to.equal(valorTempoPausado2);
+      });
+    });
+
+    cy.get('.vjs-mute-control').click();
+
+    cy.get('.vjs-mute-control').should('have.class', 'vjs-vol-0');
+
+    cy.get('.vjs-mute-control').click();
+
+    cy.get('.vjs-mute-control').should('not.have.class', 'vjs-vol-0');
+  });
+
   it('Escrever uma avaliação para um produto', () => { 
     cy.get('#nav-link-accountList').click();
 
