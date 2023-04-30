@@ -18,7 +18,7 @@ describe('Testes relacionados com a lista de produtos', () => {
 
     cy.get('[data-component-type="s-search-results"]').should("not.contain.text", "Batom Mac");
 
-    cy.get('[data-component-type="s-search-results"]').should("contain.text", "Logitech Teclado mecânico");
+    cy.get('[data-component-type="s-search-results"]').should("contain.text", "Teclado sem fio Logitech");
 
     cy.get('[data-component-type="s-search-results"]').should("contain.text", "Logitech MX Master");
 
@@ -97,7 +97,7 @@ describe('Testes relacionados com a lista de produtos', () => {
 
     cy.get('#scarface-review-title-label').type('Test Avaliação');
 
-    cy.get('input[type="file"]').selectFile('/home/me/Vinicius/automacao.png', { force: true });
+    cy.get('input[type="file"]').selectFile('/home/me/Vinicius/automacao-frameworks/automacao.png', { force: true });
 
     cy.get('#scarface-review-text-card-title').type('Muito bom Test');
 

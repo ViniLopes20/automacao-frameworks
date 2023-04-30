@@ -3,7 +3,7 @@ describe('Testes relacionados com a Barra de Pesquisa', () => {
     cy.visit('https://amazon.com.br');
   });
 
-  it('Usar o filtro de busca antes de realizar uma pesquisa', () => { 
+    it('Usar o filtro de busca antes de realizar uma pesquisa', () => { 
       cy.get('[id="searchDropdownBox"]').select('Computadores e Informática',{force: true});
   
       cy.get('.nav-search-field').type('Mac');

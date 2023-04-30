@@ -54,17 +54,17 @@ describe('Testes relacionados com navegação pelo site', () => {
 
       cy.get('#nav-global-location-popover-link').click();
 
-      cy.get(':nth-child(1) > .a-list-item > .a-button').should("exist");
+      cy.get('#GLUXAddressList > :nth-child(1) > .a-list-item > .a-button').should("exist");
 
-      cy.get(':nth-child(2) > .a-list-item > .a-button').should("exist");
+      cy.get('#GLUXAddressList > :nth-child(2) > .a-list-item > .a-button').should("exist");
 
-      cy.get(':nth-child(2) > .a-list-item > .a-button').click();
+      cy.get('#GLUXAddressList > :nth-child(2) > .a-list-item > .a-button').click({ force: true });
 
       const endereco2 = cy.get('#glow-ingress-line2').invoke('text');
       
       expect(endereco1).not.equal(endereco2);
 
-      cy.get('#nav-global-location-popover-link').click();
+      cy.get('#nav-global-location-popover-link').click({ force: true });
 
       cy.get('#GLUXZipUpdateInput_0').type('50050');
 
