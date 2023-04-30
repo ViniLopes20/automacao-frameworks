@@ -20,6 +20,16 @@ Navegar pelo menu suspenso das opções do usuário
     Navegue para a lista de pedidos do usuário pelo menu suspeso que apareceu na tela
     Verifique que foi redirecionado para a página da lista de pedidos do usuário
 
+Navegar pelo widget tipo Slider
+    Verifique que o botão da esquerda está desabilitado
+    Verifique que o botão da direita está habilitado
+    Clique para avançar as categorias do widget
+    Verifique que o botão da esquerda está habilitado
+    Verifique que o botão da direita está desabilitado
+    Clique para voltar as categorias do widget
+    Verifique que o botão da esquerda está desabilitado
+    Verifique que o botão da direita está habilitado
+
 Interagir com o modal de endereços salvos
     Fazer Login com o email "test@hotmail.com" e a senha "test"
     Clique no campo para mudar o endereço

@@ -33,12 +33,20 @@ ${PRIMEIRO_BOTAO_VER_TUDO}              xpath=(//a[contains(@class,'hmenu-compre
 ${OPCAO_CATEGORIA_GAMES_CONSOLE}        xpath=//a[@class='hmenu-item']//div[text()='Games e Consoles']
 ${OPCAO_SUBCATEGORIA_GAMES_CONSOLE}     xpath=//a[@class='hmenu-item' and text()='Tudo em Games e Consoles']
 
+${VOLTAR_MENU_SLIDER}                   xpath=//div[@id='desktop-top']//a[@aria-label='Voltar para slide anterior']
+${AVANCAR_MENU_SLIDER}                  xpath=//div[@id='desktop-top']//a[@aria-label='Passar para próximo slide']
+${VOLTAR_MENU_SLIDER_DESABILITADO}
+...                                     xpath=//div[@id='desktop-top']//a[@aria-label='Voltar para slide anterior' and contains(@class,'disabled')]
+${AVANCAR_MENU_SLIDER_DESABILITADO}
+...                                     xpath=//div[@id='desktop-top']//a[@aria-label='Passar para próximo slide' and contains(@class,'disabled')]
+
 ${TITULO_PAGINA}                        xpath=//h1[text()='Seus pedidos']
 
 
 *** Keywords ***
 Acessar Amazon
     Open Browser    ${URL}    ${BROWSER}
+    Maximize Browser Window
     Title Should Be    Amazon.com.br | Tudo pra você, de A a Z.
 
 Fazer Login com o email "${EMAIL}" e a senha "${SENHA}"
@@ -114,6 +122,30 @@ Coloque o número de um CEP "${CEP_INICIO}" "${CEP_FINAL}"
 Verifique que o alerta de erro aparece
     Wait Until Element Is Visible    ${MENSAGME_CEP_INVALIDO}
     Page Should Contain Element    ${MENSAGME_CEP_INVALIDO}
+
+Clique para avançar as categorias do widget
+    Wait Until Element Is Visible    ${AVANCAR_MENU_SLIDER}
+    Click Element    ${AVANCAR_MENU_SLIDER}
+
+Clique para voltar as categorias do widget
+    Wait Until Element Is Visible    ${VOLTAR_MENU_SLIDER}
+    Click Element    ${VOLTAR_MENU_SLIDER}
+
+Verifique que o botão da esquerda está desabilitado
+    Wait Until Element Is Visible    ${VOLTAR_MENU_SLIDER_DESABILITADO}
+    Page Should Contain Element    ${VOLTAR_MENU_SLIDER_DESABILITADO}
+
+Verifique que o botão da direita está habilitado
+    Wait Until Element Is Visible    ${AVANCAR_MENU_SLIDER}
+    Page Should Contain Element    ${AVANCAR_MENU_SLIDER}
+
+Verifique que o botão da esquerda está habilitado
+    Wait Until Element Is Visible    ${VOLTAR_MENU_SLIDER}
+    Page Should Contain Element    ${VOLTAR_MENU_SLIDER}
+
+Verifique que o botão da direita está desabilitado
+    Wait Until Element Is Visible    ${AVANCAR_MENU_SLIDER_DESABILITADO}
+    Page Should Contain Element    ${AVANCAR_MENU_SLIDER_DESABILITADO}
 
 Fechar Navegador
     Close Browser
