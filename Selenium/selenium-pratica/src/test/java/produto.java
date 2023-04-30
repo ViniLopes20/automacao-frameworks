@@ -37,7 +37,7 @@ public class produto {
         String htmlDoElemento2 = resultadoListaProduto2.getAttribute("innerHTML");
         Assertions.assertFalse(htmlDoElemento2.contains("Apple notebook MacBook"));
         Assertions.assertFalse(htmlDoElemento2.contains("Batom Mac"));
-        Assertions.assertTrue(htmlDoElemento2.contains("Logitech Teclado mecânico"));
+        Assertions.assertTrue(htmlDoElemento2.contains("Teclado sem fio Logitech"));
         Assertions.assertTrue(htmlDoElemento2.contains("Logitech MX Master"));
         WebElement filtroPreco = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='priceRefinements']//span[text()='Até R$50']")));
         actions.moveToElement(filtroPreco).click().perform();
@@ -103,7 +103,7 @@ public class produto {
         Actions actions = new Actions(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        String filePath = "/home/me/Vinicius/automacao.png";
+        String filePath = "/home/me/Vinicius/automacao-frameworks/automacao.png";
 
         driver.get("https://amazon.com.br");
         WebElement botaoLogin = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='nav-signin-tooltip']//span[@class='nav-action-inner']")));
