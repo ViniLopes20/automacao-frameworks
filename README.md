@@ -1,4 +1,7 @@
 # COMPARAÇÃO ENTRE FRAMEWORKS DE TESTES DE SISTEMA WEB
+## Trabalho Escrito:
+
+Acesse o trabalho escrito [aqui](https://github.com/ViniLopes20/automacao-frameworks/blob/main/Trabalho%20TCC%20-%20Vinicius%20Lopes.pdf)
 
 ## Frameworks Utilizados
 
